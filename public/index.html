@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>הצטרפות לקופת גמל - מור</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Frank+Ruhl+Libre:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="brand">
+        <div class="logo">
+          <img src="Mor.png" alt="לוגו מור" />
+        </div>
+        <div class="brand-text">
+          <p class="eyebrow">מור השקעות - קופות גמל</p>
+          <h1>הצטרפות לקופת גמל</h1>
+          <p class="subhead">
+            מלאו את הפרטים, צרפו את המסמכים הנדרשים, והמערכת תעביר את בקשת ההצטרפות לטיפול מהיר.
+          </p>
+        </div>
+      </header>
+
+      <form
+        id="claim-form"
+        class="card"
+        autocomplete="off"
+        data-lpignore="true"
+        data-1p-ignore="true"
+        data-form-type="other"
+        data-bwignore="true"
+      >
+        <div class="field-grid">
+          <label class="field">
+            <span>שם פרטי</span>
+            <input
+              type="text"
+              name="first_name"
+              autocomplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-form-type="other"
+              data-bwignore="true"
+              required
+              placeholder="דוגמה: נועה"
+            />
+          </label>
+          <label class="field">
+            <span>שם משפחה</span>
+            <input
+              type="text"
+              name="last_name"
+              autocomplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-form-type="other"
+              data-bwignore="true"
+              required
+              placeholder="דוגמה: לוי"
+            />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>אימייל ליצירת קשר</span>
+          <input
+            type="email"
+            name="email"
+            dir="ltr"
+            autocomplete="off"
+            data-lpignore="true"
+            data-1p-ignore="true"
+            data-form-type="other"
+            data-bwignore="true"
+            required
+            placeholder="name@example.com"
+          />
+        </label>
+
+        <div class="field">
+          <span>מסמכי הצטרפות (תעודת זהות, טופס הצטרפות)</span>
+          <label id="drop-zone" class="drop-zone">
+            <input
+              id="claim_file"
+              name="claim_file"
+              type="file"
+              accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+              required
+            />
+            <div class="drop-content">
+              <div class="drop-icon">⇣</div>
+              <div>
+                <strong>גררו קובץ לכאן</strong>
+                <p>או לחצו לבחירת קובץ מהמחשב</p>
+              </div>
+            </div>
+            <div class="file-meta">
+              <span id="file-name">לא נבחר קובץ</span>
+              <span id="file-size">—</span>
+            </div>
+          </label>
+          <p class="hint">קבצים מותרים: PDF, JPG, PNG או Word. גודל מומלץ עד 15MB.</p>
+        </div>
+
+        <button id="submit-btn" class="submit" type="submit">
+          <span>שליחת בקשת הצטרפות</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+
+        <div id="status" class="status" role="status" aria-live="polite">
+          <span class="status-check" aria-hidden="true">
+            <svg viewBox="0 0 52 52" role="presentation">
+              <circle cx="26" cy="26" r="24" fill="none" />
+              <path d="M15 27l8 8 14-16" fill="none" />
+            </svg>
+          </span>
+          <span id="status-text"></span>
+        </div>
+      </form>
+
+      <p class="footnote">
+        המסמכים נשמרים בצורה מאובטחת ומועברים ישירות לצוות קופות הגמל במור השקעות.
+      </p>
+    </main>
+
+    <div id="success-modal" class="success-modal" aria-hidden="true">
+      <div class="success-card" role="dialog" aria-modal="true" aria-labelledby="success-title">
+        <div class="success-icon" aria-hidden="true">
+          <svg viewBox="0 0 120 120" role="presentation">
+            <circle cx="60" cy="60" r="54" fill="none" />
+            <path d="M36 64l16 16 32-36" fill="none" />
+          </svg>
+        </div>
+        <h2 id="success-title">בקשת ההצטרפות נשלחה בהצלחה</h2>
+        <p>קיבלנו את המסמכים ומעבירים אותם לטיפול צוות קופות הגמל במור.</p>
+        <button id="success-close" class="ghost" type="button">שליחת בקשת הצטרפות נוספת</button>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script>
+      (() => {
+        const s = document.createElement('script');
+        s.src = 'https://wonderful.app.demo.wonderful.ai/embed/wonderful-chat.js';
+        s.onload = () => {
+          new window.WonderfulChat({
+            environment: "wonderful.api.demo.wonderful.ai",
+            agentId: "a5141f52-16eb-4255-bdea-d5ca0cb1f8c6",
+
+            // Core settings
+            agentName: 'נציג מור',
+            buttonText: 'דבר עם נציג',
+            placeholderText: 'כתבו הודעה כאן...',
+            isRTL: true,
+
+            // Main theme colors
+            primaryColor: '#1e3a5f',
+            accentColor: '#20b2aa',
+            textColor: '#1a1a1a',
+
+            // Chat appearance
+            headerBgColor: '#1e3a5f',
+            headerTextColor: '#ffffff',
+
+            // Message bubbles
+            userBubbleColor: '#20b2aa',
+            userTextColor: '#ffffff',
+            agentBubbleColor: '#f0f7f9',
+            agentTextColor: '#1a1a1a',
+
+            // Background colors
+            windowBgColor: '#ffffff',
+            messagesBgColor: '#fafafa',
+            inputBgColor: '#f0f7f9',
+
+            // Status indicators
+            statusColor: '#1e3a5f',
+            errorColor: '#d32f2f',
+
+            // Optional logo (can be removed)
+            logoUrl: 'Mor.png'
+          });
+        };
+        document.head.appendChild(s);
+      })();
+    </script>
+  </body>
+</html>
