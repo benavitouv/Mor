@@ -373,8 +373,8 @@ input:focus {
   transition: stroke-dashoffset 0.6s ease 0.18s;
 }
 
-.success-modal.is-visible .success-icon circle,
-.success-modal.is-visible .success-icon path {
+#result-modal.is-visible .success-icon circle,
+#result-modal.is-visible .success-icon path {
   stroke-dashoffset: 0;
 }
 
@@ -386,6 +386,66 @@ input:focus {
 .success-card p {
   margin: 0 0 20px;
   color: var(--muted);
+}
+
+/* Result modal states */
+.result-state {
+  display: none;
+}
+
+#result-modal[data-state='success'] .result-state--success {
+  display: block;
+}
+
+#result-modal[data-state='error'] .result-state--error {
+  display: block;
+}
+
+/* Error icon */
+.error-icon {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+}
+
+.error-icon svg {
+  width: 140px;
+  height: 140px;
+}
+
+.error-icon circle {
+  stroke: #c0392b;
+  stroke-width: 6;
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.error-icon line {
+  stroke: #c0392b;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  transition: stroke-dashoffset 0.4s ease 0.3s;
+}
+
+.error-icon line:last-child {
+  transition-delay: 0.45s;
+}
+
+#result-modal.is-visible .error-icon circle {
+  stroke-dashoffset: 0;
+}
+
+#result-modal.is-visible .error-icon line {
+  stroke-dashoffset: 0;
+}
+
+.result-state--error h2 {
+  color: #b3301f;
 }
 
 .ghost {

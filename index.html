@@ -129,17 +129,33 @@
       </p>
     </main>
 
-    <div id="success-modal" class="success-modal" aria-hidden="true">
-      <div class="success-card" role="dialog" aria-modal="true" aria-labelledby="success-title">
-        <div class="success-icon" aria-hidden="true">
-          <svg viewBox="0 0 120 120" role="presentation">
-            <circle cx="60" cy="60" r="54" fill="none" />
-            <path d="M36 64l16 16 32-36" fill="none" />
-          </svg>
+    <div id="result-modal" class="success-modal" aria-hidden="true">
+      <div class="success-card" role="dialog" aria-modal="true">
+
+        <div class="result-state result-state--success">
+          <div class="success-icon" aria-hidden="true">
+            <svg viewBox="0 0 120 120" role="presentation">
+              <circle cx="60" cy="60" r="54" fill="none" />
+              <path d="M36 64l16 16 32-36" fill="none" />
+            </svg>
+          </div>
+          <h2>הבקשה הוגשה בהצלחה</h2>
+          <p>הבקשה התקבלה בהצלחה. הצוות שלנו יצור אתכם קשר תוך 3 ימי עסקים.</p>
         </div>
-        <h2 id="success-title">בקשת ההצטרפות נשלחה בהצלחה</h2>
-        <p>קיבלנו את המסמכים ומעבירים אותם לטיפול צוות קופות הגמל במור.</p>
-        <button id="success-close" class="ghost" type="button">שליחת בקשת הצטרפות נוספת</button>
+
+        <div class="result-state result-state--error">
+          <div class="error-icon" aria-hidden="true">
+            <svg viewBox="0 0 120 120" role="presentation">
+              <circle cx="60" cy="60" r="54" fill="none" />
+              <line x1="42" y1="42" x2="78" y2="78" />
+              <line x1="78" y1="42" x2="42" y2="78" />
+            </svg>
+          </div>
+          <h2>שגיאה בעיבוד הבקשה</h2>
+          <p>הטופס המצורף חסר תעודת זהות וחתימה של מגיש הבקשה. אנא השלימו את המסמכים ונסו שנית.</p>
+        </div>
+
+        <button id="result-close" class="ghost" type="button">סגור</button>
       </div>
     </div>
 

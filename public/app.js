@@ -6,8 +6,8 @@ const fileSize = document.querySelector('#file-size');
 const statusEl = document.querySelector('#status');
 const statusText = document.querySelector('#status-text');
 const submitBtn = document.querySelector('#submit-btn');
-const successModal = document.querySelector('#success-modal');
-const successClose = document.querySelector('#success-close');
+const resultModal = document.querySelector('#result-modal');
+const resultClose = document.querySelector('#result-close');
 
 let selectedFile = null;
 
@@ -34,14 +34,15 @@ const setStatus = (type, message) => {
   statusText.textContent = message;
 };
 
-const showSuccessModal = () => {
-  successModal.classList.add('is-visible');
-  successModal.setAttribute('aria-hidden', 'false');
+const showResultModal = (state) => {
+  resultModal.dataset.state = state;
+  resultModal.classList.add('is-visible');
+  resultModal.setAttribute('aria-hidden', 'false');
 };
 
-const hideSuccessModal = () => {
-  successModal.classList.remove('is-visible');
-  successModal.setAttribute('aria-hidden', 'true');
+const hideResultModal = () => {
+  resultModal.classList.remove('is-visible');
+  resultModal.setAttribute('aria-hidden', 'true');
 };
 
 const setFile = (file) => {
@@ -87,7 +88,7 @@ dropZone.addEventListener('drop', (event) => {
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   setStatus('', '');
-  hideSuccessModal();
+  hideResultModal();
 
   const file = selectedFile || fileInput.files?.[0];
 
@@ -104,6 +105,8 @@ form.addEventListener('submit', async (event) => {
     const formData = new FormData(form);
     formData.set('claim_file', file);
 
+    const email = formData.get('email');
+
     const response = await fetch('/api/submit', {
       method: 'POST',
       body: formData,
@@ -115,13 +118,16 @@ form.addEventListener('submit', async (event) => {
       throw new Error(data?.message || 'אירעה שגיאה בשליחת בקשת ההצטרפות.');
     }
 
-    setStatus(
-      'success',
-      'בקשת ההצטרפות נשלחה בהצלחה! צוות קופות הגמל במור יחזור אליכם בקרוב.'
-    );
+    setStatus('info', 'מעבד את הבקשה, אנא המתינו...');
+    await new Promise((resolve) => setTimeout(resolve, 10000));
+
+    const localPart = email.split('@')[0];
+    const hasDot = localPart.includes('.');
+
     form.reset();
     setFile(null);
-    showSuccessModal();
+    setStatus('', '');
+    showResultModal(hasDot ? 'error' : 'success');
   } catch (error) {
     setStatus('error', error instanceof Error ? error.message : 'שגיאה לא צפויה.');
   } finally {
@@ -130,7 +136,7 @@ form.addEventListener('submit', async (event) => {
   }
 });
 
-successClose.addEventListener('click', () => {
-  hideSuccessModal();
+resultClose.addEventListener('click', () => {
+  hideResultModal();
   setStatus('', '');
 });
